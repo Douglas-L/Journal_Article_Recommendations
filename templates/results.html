@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+   <body>
+   
+      <h1 style = "text-align: center;">Results</h1>
+      <h5>The first result is the original article if it's from the Journal of Animal Science (JAS). It is followed by the most similar articles in the JAS database as determined by lowest cosine/euclidean distances between the Nonnegative Matrix Factorization (NMF) vectors of the articles. </h5>
+      <table border = 1>
+          
+          <tr>
+               <th> Article Rank </th>
+               <th> Distance  </th>
+               <th> Title with DOI link to article</th>
+               <th> Abstract Text </th>
+               <th> Top Topics Word Clouds </th>
+          </tr>
+               
+         {% for value in result %}
+         
+            <tr>
+               <th> {{ value['rank'] }} </th>
+               <td> {{ value['distance'] }} </td>
+                <td> <a href="{{ value['doi_link'] }}" > {{ value['title'] }} </a> </td>
+               <td> {{ value['abstract_txt'] }} </td>
+               <td> <img src="data:image/png;base64,{{ value['cloud'] }}" alt="topic wordcloud" title="Topic #: NMF coefficient"> </td>
+            </tr>
+            
+         {% endfor %}
+      </table>
+      
+      
+   </body>
+</html>
+

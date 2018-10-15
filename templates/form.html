@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+   <body>
+   
+      <h2 style = "text-align: center;">Entry Form</h2>
+		
+      {% for message in form.og_abstract.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+      
+      
+      <form action = "http://localhost:5000/results" method = post>
+         <fieldset>
+            <legend>Entry Form</legend>
+            {{ form.hidden_tag() }}
+            
+            <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+               {{ form.og_abstract.label }}<br>
+               {{ form.og_abstract }}
+               <br>
+               
+               {{ form.similarity.label }} {{ form.similarity }}
+               {{ form.keyword.label }}<br>
+               {{ form.keyword }}
+               <br>
+             
+               
+               {{ form.num_results.label }}<br>
+               {{ form.num_results }}
+               <br>
+               
+               {{ form.submit }}
+            </div>
+            
+         </fieldset>
+      </form>
+      
+   </body>
+</html>
