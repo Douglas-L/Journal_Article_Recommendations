@@ -45,7 +45,7 @@ The first step is processing text is tokenizing. I chose to use the NLTK library
 Second, I vectorized the corpus of text generated using the tfidf vectorizer from Sklearn. Tfidf, which stands for term frequency inverse document frequency, penalizes terms that are common in all documents, thereby uncovering terms that are actually important to specific documents. 
 
 Third, I did topic modeling of the tfidf vectors using a nonnegative matrix factorization (NMF). 
-I also tried count vectorizer and running a Latent Dirichlet Allocation (LDA) in an earlier notebook, but I found the NMF components to be more promising and I value being able to use tfidf instead of count vectorizer. I began with 20 components, but expanded to 100 because the 20 components were too broad and captured only things like species differences and broad topics like genetics versus nutrition which are redundant with the article categories. The 100 components produced much more specific topics, though this does come at the cost of some interpretability of the topics. Rather than hand labeling each component, I decided to use a word cloud to visualize the component with its top 100 words. 
+I also tried count vectorizer and running a Latent Dirichlet Allocation (LDA) in an earlier notebook, but I found the NMF components to be more promising and I value being able to use tfidf instead of count vectorizer. I began with 20 components, but expanded to 40 to capture some finer topics such as forages and grazing. I ended up trimming this number back down to 20 by combining a few repeated components back into the same topic such as feeding trials. 
 
 # Recommendations
 
@@ -59,16 +59,16 @@ From my results, I can tell this recommendation system will not be competing wit
 
 # Future Directions
 
-One interesting followup would be to take the topics and see how they have evolved over time. For example, in ruminant nutrition, I am curious how much research was done on feeding grain before and after feedlots became prominent. Component 88 might be a relevant topic. 
+One interesting followup would be to take the topics and see how they have evolved over time. For example, in ruminant nutrition, I am curious how much research was done on feeding grain before and after feedlots became prominent. Components 13 and 7 might be relevant topics. 
 
-    88 ['starch', 'grain', 'sorghum', 'digestion', 'barley', 'wheat', 'intestine', 'processing', 'small', 'grains', 'tract', 'intestinal', 'digested', 'potato', 'rolled']
-Or component 72 might be relevant for the development of Total Mixed Rations, which are nutritionally balanced feed blended together to guarantee consumption.
+    13 ['corn', 'silage', 'grain', 'starch', 'ground', 'oil', 'moisture', 'value', 'sorghum', 'wheat', 'grains', 'supplement', 'barley', 'silages', 'highmoisture']
+<!-- Or component 72 might be relevant for the development of Total Mixed Rations, which are nutritionally balanced feed blended together to guarantee consumption. -->
      
-     72 ['lysine', 'methionine', 'dietary', 'requirement', 'tryptophan', 'threonine', 'llysine', 'diets', 'pst', 'digestible', 'cornsoybean', 'opaque', 'arginine', 'gainfeed', 'linear']
+     7 ['steers', 'cattle', 'feedlot', 'steer', 'dmi', 'trial', 'gain', 'adg', 'performance', 'feed', 'beef', 'phase', 'period', 'hereford', 'grade']
 
 I might revise the word clouds to be bar charts, with bars proportional to word weight, to characterize each component or topic better. This may also help with actually labeling the topics and grouping similar components together to answer questions like the ones I have just mentioned. The application would also benefit from additional styling. 
 
 Lastly, this pipeline can be easily adapted to other journals or text corpora and make recommendations from those corpora. 
 
-Last worked on Aug 27, 2018
+Last updated on Mar 1, 2019
 
