@@ -45,7 +45,7 @@ The first step is processing text is tokenizing. I chose to use the NLTK library
 Second, I vectorized the corpus of text generated using the tfidf vectorizer from Sklearn. Tfidf, which stands for term frequency inverse document frequency, penalizes terms that are common in all documents, thereby uncovering terms that are actually important to specific documents. 
 
 Third, I did topic modeling of the tfidf vectors using a nonnegative matrix factorization (NMF). 
-I also tried count vectorizer and running a Latent Dirichlet Allocation (LDA) in an earlier notebook, but I found the NMF components to be more promising and I value being able to use tfidf instead of count vectorizer. I began with 20 components, but expanded to 40 to capture some finer topics such as forages and grazing. I ended up trimming this number back down to 20 by combining a few repeated components back into the same topic such as feeding trials. 
+I also tried count vectorizer and running a Latent Dirichlet Allocation (LDA) in an earlier notebook, but I found the NMF components to be more promising and I value being able to use tfidf instead of count vectorizer. I began with 20 components, but expanded to 30 to capture some finer topics such as vitamins and minerals. I was able to this number down to 18 by combining a few repeated components back into the same topic such as feeding trials. 
 
 # Recommendations
 
@@ -61,14 +61,21 @@ From my results, I can tell this recommendation system will not be competing wit
 
 One interesting followup would be to take the topics and see how they have evolved over time. For example, in ruminant nutrition, I am curious how much research was done on feeding grain before and after feedlots became prominent. Components 13 and 7 might be relevant topics. 
 
-    13 ['corn', 'silage', 'grain', 'starch', 'ground', 'oil', 'moisture', 'value', 'sorghum', 'wheat', 'grains', 'supplement', 'barley', 'silages', 'highmoisture']
-<!-- Or component 72 might be relevant for the development of Total Mixed Rations, which are nutritionally balanced feed blended together to guarantee consumption. -->
+    13 ['corn', 'silage', 'diets', 'grain', 'oil', 'starch', 'meal', 'ground', 'ddgs', 'wheat', 'grains', 'moisture', 'soybean', 'sorghum', 'value']
      
-     7 ['steers', 'cattle', 'feedlot', 'steer', 'dmi', 'trial', 'gain', 'adg', 'performance', 'feed', 'beef', 'phase', 'period', 'hereford', 'grade']
+     7 ['steers', 'cattle', 'feedlot', 'pasture', 'steer', 'dmi', 'gain', 'adg', 'trial', 'period', 'feed', 'performance', 'gains', 'bw', 'phase'
 
-I might revise the word clouds to be bar charts, with bars proportional to word weight, to characterize each component or topic better. This may also help with actually labeling the topics and grouping similar components together to answer questions like the ones I have just mentioned. The application would also benefit from additional styling. 
+A simple implementation of this is now up on [Tableau public.](https://public.tableau.com/profile/douglas.lee2850#!/vizhome/JournalofAnimalScienceTopicPopularityThroughTime/JASTopicPopularity?publish=yes) 
 
-Lastly, this pipeline can be easily adapted to other journals or text corpora and make recommendations from those corpora. 
+I have assigned the biggest component from the vector corresponding to each abstract as a crude repesentation of the topic or cluster that the article belongs to. A few interesting findings from this visualization:
+1. 2016 had an explosion in articles published. 
+2. Genetics and selection have seen the biggest growth over the years.
+3. Articles related to feedlots have grown steadily, but not as dramatic as genetics.
 
-Last updated on Mar 1, 2019
+More time and effort will be required to drill down and explore the trends more thoroughly.
+
+
+Looking beyond the Journal of Animal Science, this pipeline can be easily adapted to other journals or text corpora and make recommendations from those corpora. 
+
+Last updated on Mar 10, 2019
 
